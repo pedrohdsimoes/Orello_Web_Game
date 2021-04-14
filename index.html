@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+
+<html lang="pt">
+
+<head>
+    <meta charset=UTF-8>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <script src="othello.js"></script>
+    <title> Orello </title>
+</head>
+
+<body>
+    <div id="#container">
+        <div class="topnav">
+            <a class="active" href="#base" onclick="orello.start()">Start</a>
+            <a id="rules">Instruções</a>
+            <div id="myModal" class="modal">
+                <div class="modal-content">
+                  
+        
+                    <h2>Instruções</h2>
+        
+                    <h3>Regras do Jogo:</h3>
+                    <ul>
+                        <li>Na posição inicial há 4 peças</li>
+                        <li>2 de cada uma das 2 tonalidades — claro e escuro</li>
+                        <li>Colocadas nas casas centrais</li>
+                        <li>Peças da mesma tonalidade ficam em diagonal</li>
+                        <li>As peças escuras jogam primeiro</li>
+                        <li>Durante o jogo os jogadores jogam alternadamente</li>
+                        <li>Colocam uma peça da sua cor numa casa livre</li>
+                        <li>Se na mesma linha, coluna ou diagonal da peça jogada …</li>
+                        <li>… peças da cor contrária viram para a cor do jogador</li>
+                        <li>Só pode ser jogada uma peça se for virada alguma</li>
+                        <li>A peça colocada pode virar várias peças do adversário</li>
+                        <li>Que estão na mesma linha coluna ou diagonal da peça jogada</li>
+                        <li>Desde que num dos extremos esteja a peça jogada</li>
+                        <li>E no outro esteja uma peça do mesmo tom</li>
+                        <li>Podem ser viradas várias peças consecutivas do adversário</li>
+                        <li>Na mesma linha, coluna ou diagonal</li>
+                        <li>Desde que delimitadas pela peça jogada</li>
+                        <li>E outra do mesmo tom (do jogador)</li>
+        
+                    </ul>
+        
+                    <h3>Como jogar:</h3>
+                    <ul>
+                        <li>Carregue no start no menu para começar o jogo</li>
+                        <li>Com o rato, escolha a posição onde quer colocar a peça</li>
+                        <li>Se a posição que escolheu não for valida, aparecerá uma mensagem a avisá-lo</li>
+                        <li>Carregue no botão para passar a jogada</li>
+                        <li>Carregue botão para desistir</li>
+                    </ul>
+        
+                </div>
+        
+            </div>
+            <a id="scores" onclick="orello.ranking()">Classificações</a>
+            <div id="myScores" class = "modal">
+                <!-- Modal content -->
+                <div class="modal-content">
+                  <p class = "centerModal"></p>
+                  <div id="table_on">
+                    <table id="test_on" class='cf'>
+                      <tr class='cf'>
+                        <th class='cf'>Nome de Utilizador</th>
+                        <th class='cf'>Número de jogos</th>
+                        <th class='cf'>Número de vitórias</th>
+                        <th class='cf'>Número de derrotas</th>
+                        <th class='cf'>Percentagem de vitórias</th>
+                      </tr>
+                      <tr>
+                        <td class='cf'>Jogador</td>
+                        <td class='cf'>0</td>
+                        <td class='cf'>0</td>
+                        <td class='cf'>0</td>
+                        <td class='cf'>0%</td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+            </div>
+            <div class="login-container">
+
+                <form action="/action_page.php">
+                    <input type="text" placeholder="Username" name="username" required id="nick">
+                    <input type="password" required placeholder="Password" name="pw" id="pass">
+                    <button type="button" onclick="orello.register()">Login</button>
+                </form>
+            </div>
+
+        </div>
+
+
+        <div id="logo">
+            <div id="img">
+                <img src="https://i.somethingawful.com/inserts/news/images/02-2002/020902-oreo.jpg" alt="LogOreo">
+            </div>
+            <div id="titleLogo">
+                <h1> Orello </h1>
+
+            </div>
+
+        </div>
+        <p id="userLogin"></p>
+        <canvas id="loadingCanvas" width="250" height="250"></canvas>
+        <div id="config">
+            <div id="modo">
+                <h3>Modo de Jogo:</h3>
+            </div>
+
+            <div class="Row">
+                <div class="Column">
+                    Jogar contra:
+                    <label class="container">PC
+                        <input type="radio" checked="checked" name="jogador" id="pc">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container">P2
+                        <input type="radio" name="jogador" id="p2">
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+                <div class="Column">
+                    Cor pretendida:
+                    <label class="container">Bolacha
+                        <input type="radio" checked="checked" name="peça">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="container">Recheio
+                        <input type="radio" name="peça">
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+                <div class="Column">
+                    Nivel de Dificuldade:
+                    <input type="range" min="1" max="3" value="50" class="slider" id="RangerSlide">
+
+                </div>
+            </div>
+            <div id= "confirmar">
+                <button type = "button" onclick="orello.gameMode()"> CONFIRMAR</button>
+        </div>
+        </div>
+
+        <div id="game">
+            <br>
+            <div id="base">
+                <div id="showturn"></div>
+                <br>
+            </div>
+            <div id="commands">
+                <div><button id="skipServer" class="skip" disabled="disabled" onclick="orello.changePlayer()">Passar jogada</button></div>
+                <div><button class="giveup" onclick="orello.giveUp()">Desistir</button></div>
+            </div>
+        </div>
+        <div id="cfTable">
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+</body>
+
+</html>
